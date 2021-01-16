@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "822993745529",
+    "project_id": "taximetroimos",
+    "storage_bucket": "taximetroimos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822993745529:android:22f304309e738feaa746a8",
+        "android_client_info": {
+          "package_name": "app.simov.taximetroimos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "822993745529-7mpqbsevioulc6c1g7ith3pfhkchg42v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.simov.taximetroimos",
+            "certificate_hash": "9d26ad1243b1020a9115f1dacc749447136f9254"
+          }
+        },
+        {
+          "client_id": "822993745529-n5t5knjlt02gbgpbuv26aaah7adhsrkk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8xiii7DoTeUKtq5aIDuSAvWyXOskuIus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "822993745529-n5t5knjlt02gbgpbuv26aaah7adhsrkk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
