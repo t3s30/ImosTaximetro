@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Mandamos parametro boton Cliente
-                editor.putString("user", "client");
+                editor.putString("user", "Client");
                 editor.apply();
                 goToSelectedAuth();
             }
