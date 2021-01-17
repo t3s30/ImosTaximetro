@@ -2,7 +2,9 @@ package app.simov.taximetroimos;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
+import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import app.simov.taximetroimos.includes.MyToolbar;
 import app.simov.taximetroimos.models.User;
+import dmax.dialog.SpotsDialog;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -30,11 +34,13 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputEditText mTexInputEmail;
     TextInputEditText mTexInputNombre;
     TextInputEditText mTexInputPassword;
+    AlertDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        MyToolbar.show(this,"Registro Usuario",true);
 
         mButtonRegister = findViewById(R.id.btnRegister);
         mTexInputEmail = findViewById(R.id.textInputEmail);
@@ -47,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         mPref = getApplicationContext().getSharedPreferences("typeUser", MODE_PRIVATE);
-
+        mDialog = new SpotsDialog.Builder().setContext(RegisterActivity.this).setMessage("Espere un momento").build();
         mButtonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,14 +71,17 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()){
             if (password.length()>= 6){
+                mDialog.show();
                 //Ejecutando la logica de registro en Base de datos.
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        mDialog.dismiss();
                     //Validamos si la tarea fue exitosa.
                         if (task.isSuccessful()){
+                            String id = mAuth.getCurrentUser().getUid();
                             //Ejecutamos metodo para Guardar Usuario.
-                            saveUser(name,email);
+                            saveUser(id,name,email);
                         }else{
                             Toast.makeText(RegisterActivity.this,"No se pudo registrar el usuario",Toast.LENGTH_LONG).show();
                         }
@@ -87,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void saveUser(String name, String email) {
+    private void saveUser(String id,String name, String email) {
         String seledtedUser =  mPref.getString("user","");
         if (seledtedUser.equals("Client")){
             //Instanciamos un nuevo Usuario.
@@ -97,7 +106,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
             //Creamos no users y conductores su no existe si no solo creamos valor
-            mDatabase.child("Users").child("Clients").push().setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            mDatabase.child("Users").child("Clients").child(id).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
@@ -115,7 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
             user.setNombre(name);
 
             //Creamos no users y conductores su no existe si no solo creamos valor
-            mDatabase.child("Users").child("Drivers").push().setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            mDatabase.child("Users").child("Drivers").child(id).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){

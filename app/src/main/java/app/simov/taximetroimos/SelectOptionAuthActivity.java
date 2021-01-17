@@ -11,11 +11,11 @@ import android.widget.Button;
 
 import androidx.appcompat.widget.Toolbar;
 
+import app.simov.taximetroimos.includes.MyToolbar;
+
 
 public class SelectOptionAuthActivity extends AppCompatActivity {
 
-
-    Toolbar  mToolbar;
 
     Button mButtonGoToLogin;
     Button mButtonGoToRegister;
@@ -27,11 +27,7 @@ public class SelectOptionAuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_option_auth);
-
-        mToolbar = findViewById(R.id.toolBar);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Seleccionar Opción");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        MyToolbar.show(this,"Selecciona una Opción",true);
 
 
         mButtonGoToLogin    = findViewById(R.id.btnGoToLogin);

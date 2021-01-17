@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaximetroImos">
         <activity android:name=".LoginActivity" android:parentActivityName=".SelectOptionAuthActivity"/>
-        <activity android:name=".RegisterActivity" />
+        <activity android:name=".RegisterActivity" android:parentActivityName=".SelectOptionAuthActivity" />
         <activity android:name=".SelectOptionAuthActivity" android:parentActivityName=".MainActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
