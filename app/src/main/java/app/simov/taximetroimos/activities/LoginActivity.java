@@ -1,9 +1,8 @@
-package app.simov.taximetroimos;
+package app.simov.taximetroimos.activities;
 
 import androidx.annotation.NonNull;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -21,6 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import app.simov.taximetroimos.R;
+import app.simov.taximetroimos.activities.client.MapClientActivity;
+import app.simov.taximetroimos.activities.driver.MapDriverActivity;
 import app.simov.taximetroimos.includes.MyToolbar;
 import dmax.dialog.SpotsDialog;
 
@@ -50,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDialog = new SpotsDialog.Builder().setContext(LoginActivity.this).setMessage("Espere un momento").build();
-       mPref = getApplicationContext().getSharedPreferences("typeUser", MODE_PRIVATE);
+        mPref = getApplicationContext().getSharedPreferences("typeUser", MODE_PRIVATE);
 
 
 
@@ -74,18 +76,18 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //String user = mPref.getString("user", "");
-                            Toast.makeText(LoginActivity.this, "Login Exitoso", Toast.LENGTH_SHORT).show();
-                            /*if (user.equals("client")) {
-                               *//* Intent intent = new Intent(LoginActivity.this, MapClientActivity.class);
+                            String user = mPref.getString("user", "");
+                          //  Toast.makeText(LoginActivity.this, "Login Exitoso", Toast.LENGTH_SHORT).show();
+                            if (user.equals("Client")) {
+                                Intent intent = new Intent(LoginActivity.this, MapClientActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);*//*
+                                startActivity(intent);
                             }
                             else {
-                                *//*Intent intent = new Intent(LoginActivity.this, MapDriverActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MapDriverActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);*//*
-                            }*/
+                                startActivity(intent);
+                            }
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "La contraseña o el password son incorrectos", Toast.LENGTH_SHORT).show();

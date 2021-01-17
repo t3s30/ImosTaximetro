@@ -14,16 +14,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TaximetroImos">
-        <activity android:name=".LoginActivity" android:parentActivityName=".SelectOptionAuthActivity"/>
-        <activity android:name=".RegisterActivity" android:parentActivityName=".SelectOptionAuthActivity" />
-        <activity android:name=".SelectOptionAuthActivity" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.driver.MapDriverActivity"></activity>
+        <activity android:name=".activities.client.MapClientActivity"></activity>
+        <activity
+            android:name=".activities.driver.RegisterDriverActivity"
+            android:parentActivityName=".activities.SelectOptionAuthActivity" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:parentActivityName=".activities.SelectOptionAuthActivity" />
+        <activity
+            android:name=".activities.client.RegisterActivity"
+            android:parentActivityName=".activities.SelectOptionAuthActivity" />
+        <activity
+            android:name=".activities.SelectOptionAuthActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
 
 </manifest>

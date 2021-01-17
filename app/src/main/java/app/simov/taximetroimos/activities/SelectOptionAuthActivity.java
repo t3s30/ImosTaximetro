@@ -1,4 +1,4 @@
-package app.simov.taximetroimos;
+package app.simov.taximetroimos.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.appcompat.widget.Toolbar;
-
+import app.simov.taximetroimos.R;
+import app.simov.taximetroimos.activities.client.RegisterActivity;
+import app.simov.taximetroimos.activities.driver.RegisterDriverActivity;
 import app.simov.taximetroimos.includes.MyToolbar;
 
 
@@ -56,14 +57,14 @@ public class SelectOptionAuthActivity extends AppCompatActivity {
 
     public void goToRegister() {
         String typeUser = mPref.getString("user", "");
-        if (typeUser.equals("client")) {
+        if (typeUser.equals("Client")) {
             //Innte registro cliente
             Intent intent = new Intent(SelectOptionAuthActivity.this, RegisterActivity.class);
             startActivity(intent);
         }
         else {
             //Innte registro conductor
-            Intent intent = new Intent(SelectOptionAuthActivity.this, RegisterActivity.class);
+            Intent intent = new Intent(SelectOptionAuthActivity.this, RegisterDriverActivity.class);
             startActivity(intent);
         }
     }
