@@ -28,6 +28,7 @@ public class AuthProvider {
         return mAuth.getCurrentUser().getUid();
     }
 
+    //Validar la session del Usuario
     public boolean existSession() {
         boolean exist = false;
         if (mAuth.getCurrentUser() != null) {
